@@ -134,7 +134,7 @@ def vow_con_ratio(line):
             v_count += 1
         else:
             c_count += 1
-
+    
     ratio = v_count/c_count
 
     if ratio <= range1[1]:

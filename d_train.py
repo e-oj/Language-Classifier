@@ -1,12 +1,17 @@
 import string
+import pickle
 
 from model import Example
 from d_tree import d_tree
 
 
-def train(examples):
+def train(examples, filename="tree.dt"):
     features = set(examples[0].features.keys())
     tree = d_tree(examples, features, [], 1000)
+    f = open(filename, "wb")
+
+    pickle.dump(tree, f)
+    f.close()
 
     return tree
 
@@ -55,6 +60,9 @@ def main():
         filename = files[i]
 
         for line in open(filename):
+            if not line.strip():
+                continue
+
             line = "".join([ch for ch in line if ch not in puncs])
             line = Example(line)
 
@@ -67,7 +75,10 @@ def main():
 
     if lines[1] and tree:
         test(lines[1], tree)
-
+    #else:
+        #f = open("tree.dt", "rb")
+        #tree = pickle.load(f)
+        #test(lines[1], tree)
 
 if __name__ == "__main__":
     main()
