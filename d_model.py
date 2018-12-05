@@ -89,10 +89,7 @@ def plurality_value(node):
         if not val:
             continue
 
-        if val in count:
-            count[val] += 1
-        else:
-            count[val] = 1
+        count[val] = count[val] + 1 if val in count else 1
 
         if count[val] > max_count:
             max_count = count[val]

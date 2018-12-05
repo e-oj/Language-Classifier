@@ -48,7 +48,8 @@ class DNode:
 
 def plurality_value(examples):
     count = {}
-    value = max_count = -1
+    value = None
+    max_count = -1
 
     for ex in examples:
         if ex.goal in count:
