@@ -12,6 +12,7 @@ class Instance:
 
 def get_features(line):
     v_pairs, c_pairs = vow_con_pairs(line)
+    words = set(line.split())
 
     return {
         "cv-ratio": vow_con_ratio(line),
@@ -24,11 +25,10 @@ def get_features(line):
         "has-aa": "aa" in line,
         "has-ee": "ee" in line,
         "has-uu": "uu" in line,
-        "has-oor": "oor" in line,
-        "has-een": "een" in line,
-        "has-ijk": "ijk" in line,
-        "has-pp": "pp" in line,
-        "has-word-de": "de" in set(line.split())
+        "has-word-de": "de" in words,
+        "has-word-the": "the" in words,
+        "has-word-and": "and" in words,
+        "has-word-in": "in" in words,
     }
 
 
