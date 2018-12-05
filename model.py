@@ -21,6 +21,9 @@ def get_features(line):
         "ends-e": ends_in("e", line),
         "has-aa": "aa" in line,
         "has-ee": "ee" in line,
+        "has-oor": "oor" in line,
+        "has-een": "een" in line,
+        "has-ijk": "ijk" in line,
         "has-word-de": "de" in set(line.split())
     }
 
@@ -52,7 +55,7 @@ def letter_pairs(line):
         ch = line[i]
         next_ch = line[i + 1]
 
-        if is_letter(ch) and ch == next_ch:
+        if ch == next_ch:
             pair_count += 1
 
     return pair_range(pair_count)
@@ -66,14 +69,10 @@ def vow_con_pairs(line):
         ch = line[i]
         next_ch = line[i + 1]
 
-        if not (is_letter(ch) and is_letter(next_ch)):
-            i += 2
-            continue
-
-        if ch in vowels and next_ch in vowels:
+        if ch in vowels and ch == next_ch:
             v_count += 1
             i += 2
-        elif ch not in vowels and next_ch not in vowels:
+        elif ch == next_ch:
             c_count += 1
             i += 2
         else:
@@ -105,8 +104,7 @@ def avg_word_len(line):
     range3 = 8, None
 
     for ch in line:
-        if is_letter(ch):
-            total += 1
+        total += 1
 
     avg = total//len(line.split())
 
@@ -127,9 +125,6 @@ def vow_con_ratio(line):
     range3 = 0.7, None
 
     for ch in line:
-        if not is_letter(ch):
-            continue
-
         if ch in vowels:
             v_count += 1
         else:
@@ -144,10 +139,3 @@ def vow_con_ratio(line):
         return range2
 
     return range3
-
-
-def is_letter(ch):
-    ch = ord(ch)
-
-    # between a and z?
-    return 97 <= ch <= 122

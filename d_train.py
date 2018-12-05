@@ -44,10 +44,36 @@ def decision(example, tree):
         if branch in node.children:
             node = node.children[branch]
         else:
-            print("Sorry! :( ", node.value, branch)
-            break
+            return plurality_value(node)
 
-    return None
+
+def plurality_value(node):
+    if node.is_leaf:
+        return node.value
+
+    if not node.children:
+        return None
+
+    count = {}
+    max_count = -1
+    max_val = None
+
+    for branch in node.children:
+        val = plurality_value(node.children[branch])
+
+        if not val:
+            continue
+
+        if val in count:
+            count[val] += 1
+        else:
+            count[val] = 1
+
+        if count[val] > max_count:
+            max_count = count[val]
+            max_val = val
+
+    return max_val
 
 
 def main():
@@ -60,7 +86,7 @@ def main():
         filename = files[i]
 
         for line in open(filename):
-            if not line.strip():
+            if not len(line.strip()) > 3:
                 continue
 
             line = "".join([ch for ch in line if ch not in puncs])
@@ -79,6 +105,7 @@ def main():
         #f = open("tree.dt", "rb")
         #tree = pickle.load(f)
         #test(lines[1], tree)
+
 
 if __name__ == "__main__":
     main()
