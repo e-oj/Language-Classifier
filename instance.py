@@ -24,11 +24,14 @@ def get_features(line):
         "ends-e": ends_in("e", line),
         "has-aa": "aa" in line,
         "has-ee": "ee" in line,
-        "has-uu": "uu" in line,
+        "has-word-het": "het" in words,
+        "has-word-een": "een" in words,
+        "has-word-en": "en" in words,
         "has-word-de": "de" in words,
         "has-word-the": "the" in words,
         "has-word-and": "and" in words,
         "has-word-in": "in" in words,
+        "has-word-of": "of" in words,
     }
 
 
