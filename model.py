@@ -4,7 +4,7 @@ import string
 class Example:
     def __init__(self, line):
         self.goal = line[:2]
-        self.value = line[3:]
+        self.value = line[2:]
         self.features = get_features(line)
 
 
@@ -21,9 +21,11 @@ def get_features(line):
         "ends-e": ends_in("e", line),
         "has-aa": "aa" in line,
         "has-ee": "ee" in line,
+        "has-uu": "uu" in line,
         "has-oor": "oor" in line,
         "has-een": "een" in line,
         "has-ijk": "ijk" in line,
+        "has-pp": "pp" in line,
         "has-word-de": "de" in set(line.split())
     }
 

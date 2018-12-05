@@ -25,8 +25,10 @@ def test(examples, tree):
 
         if d == ex.goal:
             correct += 1
+        else:
+            print("oops!")
 
-        print(ex.goal, ex.value[:30], d)
+        print(ex.goal, ex.value[:50], d)
 
     print()
     print((correct/len(examples)) * 100)
