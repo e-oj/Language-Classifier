@@ -3,6 +3,8 @@ import string
 
 class Example:
     def __init__(self, line):
+        puncs = string.punctuation
+        line = "".join([ch for ch in line if ch not in puncs])
         self.goal = line[:2]
         self.value = line[2:]
         self.features = get_features(line)

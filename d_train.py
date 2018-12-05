@@ -1,4 +1,3 @@
-import string
 import pickle
 
 from model import Example
@@ -82,7 +81,6 @@ def main():
     files = ("train.dat", "test.dat")
     lines = ([], [])
     tree = None
-    puncs = set(string.punctuation)
 
     for i in range(len(files)):
         filename = files[i]
@@ -91,7 +89,6 @@ def main():
             if not len(line.strip()) > 3:
                 continue
 
-            line = "".join([ch for ch in line if ch not in puncs])
             line = Example(line)
 
             print(line.goal, ":", line.features, ":", line.value)
