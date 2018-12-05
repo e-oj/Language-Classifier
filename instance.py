@@ -1,7 +1,7 @@
 import string
 
 
-class Example:
+class Instance:
     def __init__(self, line):
         puncs = string.punctuation
         line = "".join([ch for ch in line if ch not in puncs])

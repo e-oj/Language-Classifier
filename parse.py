@@ -1,4 +1,4 @@
-from example import Example
+from instance import Instance
 
 
 def parse(files):
@@ -11,7 +11,7 @@ def parse(files):
             if not len(line.strip()) > 3:
                 continue
 
-            line = Example(line)
+            line = Instance(line)
 
             print(line.goal, ":", line.features, ":", line.value)
 
