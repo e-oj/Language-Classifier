@@ -23,8 +23,6 @@ class WeightedSample:
         self.sample[i].weight = new_weight
         self.sum += new_weight
 
-        self.normalize()
-
     def get(self, i):
         return self.sample[i]
 

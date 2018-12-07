@@ -56,7 +56,7 @@ def evaluate(result, examples):
 
 
 def main():
-    model = DecisionModel("train.dat", "test.dat", "tree.dt")
+    model = DecisionModel("./in/train.dat", "./in/test.dat", "./out/tree.dt")
     model.train()
     model.test()
 
