@@ -12,10 +12,13 @@ def d_tree(examples, features, parent_examples, depth=20):
     feature, kids = max_gain(examples, features)
     root = DNode(feature)
 
+    if depth < 1:
+        depth = 1
+
     for value in kids:
         exs = kids[value]
 
-        if depth == 0:
+        if depth == 1:
             subtree = DNode(plurality_value(exs), is_leaf=True)
             root.add(value, subtree)
         else:

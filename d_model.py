@@ -17,7 +17,7 @@ class DecisionModel:
         examples = self.data["train"]
         features = set(examples[0].features.keys())
 
-        self.tree = d_tree(examples, features, [], 5)
+        self.tree = d_tree(examples, features, [], 6)
 
         f = open(self.out_file, "wb")
         pickle.dump(self.tree, f)
@@ -56,7 +56,7 @@ def evaluate(result, examples):
 
 
 def main():
-    model = DecisionModel("./in/train.dat", "./in/test.dat", "./out/tree.dt")
+    model = DecisionModel("./in/train.dat", "./in/train.dat", "./out/tree.dt")
     model.train()
     model.test()
 
