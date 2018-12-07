@@ -45,6 +45,48 @@ class DNode:
         for key in self.children:
             self.children[key].print()
 
+    def decide(self, instance):
+        node = self
+
+        while node:
+            if node.is_leaf:
+                return node.value
+
+            branch = instance.features[node.value]
+
+            if branch in node.children:
+                node = node.children[branch]
+            else:
+                return vote(node)
+
+        return None
+
+
+def vote(node):
+    if node.is_leaf:
+        return node.value
+
+    if not node.children:
+        return None
+
+    count = {}
+    max_count = -1
+    max_val = None
+
+    for branch in node.children:
+        val = vote(node.children[branch])
+
+        if not val:
+            continue
+
+        count[val] = count[val] + 1 if val in count else 1
+
+        if count[val] > max_count:
+            max_count = count[val]
+            max_val = val
+
+    return max_val
+
 
 def plurality_value(examples):
     count = {}

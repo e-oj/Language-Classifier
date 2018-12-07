@@ -2,12 +2,13 @@ import string
 
 
 class Instance:
-    def __init__(self, line):
+    def __init__(self, line, weight=None):
         puncs = string.punctuation
         line = "".join([ch for ch in line if ch not in puncs])
         self.goal = line[:2]
         self.value = line[2:]
         self.features = get_features(line)
+        self.weight = weight
 
 
 def get_features(line):

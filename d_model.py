@@ -31,7 +31,7 @@ class DecisionModel:
         result = []
 
         for ex in examples:
-            d = decision(ex, self.tree)
+            d = self.tree.decide(ex)
 
             result.append({"value": ex.value, "result": d, "goal": ex.goal})
 
@@ -53,49 +53,6 @@ def evaluate(result, examples):
 
     print()
     print(str((correct / len(examples)) * 100) + "%", "accuracy")
-
-
-def decision(example, tree):
-    node = tree
-
-    while node:
-        if node.is_leaf:
-            return node.value
-
-        branch = example.features[node.value]
-
-        if branch in node.children:
-            node = node.children[branch]
-        else:
-            return plurality_value(node)
-
-    return None
-
-
-def plurality_value(node):
-    if node.is_leaf:
-        return node.value
-
-    if not node.children:
-        return None
-
-    count = {}
-    max_count = -1
-    max_val = None
-
-    for branch in node.children:
-        val = plurality_value(node.children[branch])
-
-        if not val:
-            continue
-
-        count[val] = count[val] + 1 if val in count else 1
-
-        if count[val] > max_count:
-            max_count = count[val]
-            max_val = val
-
-    return max_val
 
 
 def main():
