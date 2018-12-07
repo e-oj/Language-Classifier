@@ -3,11 +3,11 @@ import math
 
 def d_tree(examples, features, parent_examples, depth=20):
     if not examples:
-        return DNode(plurality_value(parent_examples), True)
+        return DNode(plurality_value(parent_examples), is_leaf=True)
     if same_goal(examples):
-        return DNode(examples[0].goal, True)
+        return DNode(examples[0].goal, is_leaf=True)
     if not features:
-        return DNode(plurality_value(examples), True)
+        return DNode(plurality_value(examples), is_leaf=True)
 
     feature, kids = max_gain(examples, features)
     root = DNode(feature)
@@ -16,7 +16,7 @@ def d_tree(examples, features, parent_examples, depth=20):
         exs = kids[value]
 
         if depth == 0:
-            subtree = DNode(plurality_value(exs), True)
+            subtree = DNode(plurality_value(exs), is_leaf=True)
             root.add(value, subtree)
         else:
             subtree = d_tree(exs, features.difference({feature}), examples, depth - 1)
@@ -31,6 +31,7 @@ class DNode:
         self.is_leaf = is_leaf
         self.value = value
         self.children = {}
+        self.weight = None
 
     def add(self, label, d_node):
         self.children[label] = d_node

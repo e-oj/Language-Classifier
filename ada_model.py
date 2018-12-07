@@ -4,7 +4,7 @@ from parse import parse
 from d_tree import d_tree
 
 
-class DecisionModel:
+class AdaModel:
     def __init__(self, train_file, test_file, out_file):
         files = (train_file, test_file)
         lines = parse(files)
@@ -13,12 +13,7 @@ class DecisionModel:
         self.out_file = out_file
         self.tree = None
 
-    def train(self):
-        examples = self.data["train"]
-        features = set(examples[0].features.keys())
-
-        self.tree = d_tree(examples, features, [], 4)
-
+    def train(self, ensemble_size=10):
         f = open(self.out_file, "wb")
         pickle.dump(self.tree, f)
         f.close()
@@ -56,7 +51,7 @@ def evaluate(result, examples):
 
 
 def main():
-    model = DecisionModel("train.dat", "test.dat", "tree.dt")
+    model = AdaModel("train.dat", "test.dat", "tree.dt")
     model.train()
     model.test()
 
