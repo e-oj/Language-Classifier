@@ -47,7 +47,7 @@ class AdaModel:
             self.ensemble.append(stump)
 
         f = open(self.out_file, "wb")
-        pickle.dump(self.tree, f)
+        pickle.dump(self.ensemble, f)
         f.close()
 
     def test(self):
@@ -102,7 +102,7 @@ def evaluate(result, examples):
 
 
 def main():
-    model = AdaModel("./in/train.dat", "./in/test.dat", "./out/tree.dt")
+    model = AdaModel("./in/train.dat", "./in/test.dat", "./out/ensemble.dt")
     model.train()
     model.test()
 
