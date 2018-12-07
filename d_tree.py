@@ -40,7 +40,7 @@ class DNode:
         out = str(self.value) + " -> "
 
         for key in self.children:
-            out += str(key) + " : " + str(self.children[key].value) + ", "
+            out += str(key) + " : " + str(self.children[key].value) + " | "
 
         print(out)
 
