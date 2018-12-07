@@ -90,19 +90,28 @@ def vote(node):
     return max_val
 
 
-def plurality_value(examples):
+def count_goals(examples):
     count = {}
-    value = None
-    max_count = -1
 
     for ex in examples:
-        if ex.goal in count:
-            count[ex.goal] += 1
-        else:
-            count[ex.goal] = 1
+        weight = ex.weight if ex.weight else 1
 
-        if count[ex.goal] > max_count:
-            max_count = count[ex.goal]
+        if ex.goal in count:
+            count[ex.goal] += weight
+        else:
+            count[ex.goal] = weight
+
+    return count
+
+
+def plurality_value(examples):
+    value = None
+    max_weight = -1
+    count = count_goals(examples)
+
+    for ex in examples:
+        if count[ex.goal] > max_weight:
+            max_weight = count[ex.goal]
             value = ex.goal
 
     return value
@@ -119,14 +128,8 @@ def same_goal(examples):
 
 
 def entropy(examples):
-    count = {}
+    count = count_goals(examples)
     total = 0
-
-    for ex in examples:
-        if ex.goal in count:
-            count[ex.goal] += 1
-        else:
-            count[ex.goal] = 1
 
     for key in count.keys():
         p = count[key]/len(examples)
