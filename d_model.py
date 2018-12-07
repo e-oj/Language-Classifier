@@ -17,7 +17,7 @@ class DecisionModel:
         examples = self.data["train"]
         features = set(examples[0].features.keys())
 
-        self.tree = d_tree(examples, features, [], 1000)
+        self.tree = d_tree(examples, features, examples, 4)
 
         f = open(self.out_file, "wb")
         pickle.dump(self.tree, f)

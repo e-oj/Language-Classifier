@@ -13,13 +13,14 @@ def d_tree(examples, features, parent_examples, depth=20):
     root = DNode(feature)
 
     for value in kids:
-        if depth == 0:
-            print("ending..")
-            break
-
         exs = kids[value]
-        subtree = d_tree(exs, features.difference({feature}), examples, depth - 1)
-        root.add(value, subtree)
+
+        if depth == 0:
+            subtree = DNode(plurality_value(exs), True)
+            root.add(value, subtree)
+        else:
+            subtree = d_tree(exs, features.difference({feature}), examples, depth - 1)
+            root.add(value, subtree)
 
     print("depth: ", depth)
     return root
