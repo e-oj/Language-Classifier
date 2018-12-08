@@ -2,6 +2,17 @@ import math
 
 
 def d_tree(examples, features, parent_examples, depth=20):
+    """
+    Builds the decision tree, selecting features
+    based on information gain.
+
+    :param examples: training examples
+    :param features: set of features
+    :param parent_examples: parent's example set
+    :param depth: maximum depth
+
+    :return: The root node of a decision tree
+    """
     if not examples:
         return DNode(plurality_value(parent_examples), is_leaf=True)
     if same_goal(examples):
@@ -29,16 +40,37 @@ def d_tree(examples, features, parent_examples, depth=20):
 
 
 class DNode:
+    """
+    This class represents a single node in
+    a decision tree.
+    """
+
     def __init__(self, value, is_leaf=False):
+        """
+        Initialize the node.
+
+        :param value: the node's value
+        :param is_leaf: is this a leaf node?
+        """
         self.is_leaf = is_leaf
         self.value = value
         self.children = {}
         self.weight = None
 
     def add(self, label, d_node):
+        """
+        Adds a child to the node.
+
+        :param label: the branch label
+        :param d_node: the new node
+        """
         self.children[label] = d_node
 
     def print(self):
+        """
+        Prints a representation of the node
+        and its children.
+        """
         out = str(self.value) + " -> "
 
         for key in self.children:
@@ -50,6 +82,12 @@ class DNode:
             self.children[key].print()
 
     def decide(self, instance):
+        """
+        Classify an instance of data.
+
+        :param instance: instance of data
+        :return: classification
+        """
         node = self
 
         while node:
@@ -67,6 +105,13 @@ class DNode:
 
 
 def vote(node):
+    """
+    Get the majority classification from a
+    node's children
+
+    :param node: the node to be voted on
+    :return: majority classification
+    """
     if node.is_leaf:
         return node.value
 
@@ -93,6 +138,14 @@ def vote(node):
 
 
 def count_goals(examples):
+    """
+    Counts the number of examples for
+    each classification. Takes weights into
+    consideration.
+
+    :param examples: list of examples
+    :return: count of every classification
+    """
     count = {}
 
     for ex in examples:
@@ -107,6 +160,13 @@ def count_goals(examples):
 
 
 def plurality_value(examples):
+    """
+    Gets the majority classification from a
+    list of examples.
+
+    :param examples: list of examples.
+    :return: majority classification
+    """
     value = None
     max_weight = -1
     count = count_goals(examples)
@@ -120,6 +180,13 @@ def plurality_value(examples):
 
 
 def same_goal(examples):
+    """
+    Checks if every example in the list
+    has the same classification.
+
+    :param examples: list of examples
+    :return: True or False
+    """
     goal = examples[0].goal
 
     for i in range(1, len(examples)):
@@ -130,6 +197,10 @@ def same_goal(examples):
 
 
 def entropy(examples):
+    """
+    :param examples: list of examples
+    :return: entropy of the list
+    """
     count = count_goals(examples)
     total = 0
 
@@ -141,6 +212,15 @@ def entropy(examples):
 
 
 def max_gain(examples, features):
+    """
+    Finds a split of the example list which
+    leads to the most information gain.
+
+    :param examples: list of examples
+    :param features: set of features
+
+    :return: feature and split with max gain.
+    """
     entrpy = entropy(examples)
     max_val = -1
     max_feature = None
@@ -158,6 +238,16 @@ def max_gain(examples, features):
 
 
 def gain(examples, feature, entrpy):
+    """
+    Calculates the information gain after
+    splitting examples on a feature.
+
+    :param examples: list of examples
+    :param feature: feature to split on
+    :param entrpy: current entropy
+
+    :return: information gain
+    """
     kids = split(examples, feature)
     total = 0
 
@@ -171,6 +261,14 @@ def gain(examples, feature, entrpy):
 
 
 def split(examples, feature):
+    """
+    Splits a list of examples on a feature.
+
+    :param examples: list of examples
+    :param feature: feature to split on.
+
+    :return: table representing the split.
+    """
     result = {}
 
     for ex in examples:

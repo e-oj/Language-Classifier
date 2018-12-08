@@ -2,16 +2,34 @@ import string
 
 
 class Instance:
-    def __init__(self, line, weight=None):
+    """
+    This class represents a single instance of
+    input data.
+    """
+
+    def __init__(self, line):
+        """
+        Initializes an instance with a line of
+        text. Features are extracted from the line
+        and added to the instance.
+
+        :param line: The input line
+        """
         puncs = string.punctuation
         line = "".join([ch for ch in line if ch not in puncs])
         self.goal = line[:2]
         self.value = line[2:]
         self.features = get_features(line)
-        self.weight = weight
+        self.weight = None
 
 
 def get_features(line):
+    """
+    Gets the features of a line.
+
+    :param line: The line to be operated on
+    :return: table of features
+    """
     v_pairs, c_pairs = vow_con_pairs(line)
     words = set(line.split())
 
@@ -37,9 +55,21 @@ def get_features(line):
 
 
 def ends_in(suffix, line):
+    """
+    Checks if a word which ends in
+    "suffix" exists in the line.
+
+    :param suffix: the suffix
+    :param line: the line
+
+    :return: True or False
+    """
     line = line.split()
 
     for word in line:
+        if len(word) < len(suffix):
+            continue
+
         i = len(word) - len(suffix)
         val = True
 
@@ -57,6 +87,15 @@ def ends_in(suffix, line):
 
 
 def letter_pairs(line):
+    """
+    A range. Number of letter pairs in the
+    sentence. A letter pair is a consonant
+    or vowel pair e.g “oo” and “qq” are
+    letter pairs.
+
+    :param line: the line
+    :return: range of letter pairs
+    """
     pair_count = 0
 
     for i in range(len(line) - 1):
@@ -70,6 +109,15 @@ def letter_pairs(line):
 
 
 def vow_con_pairs(line):
+    """
+    A range. Number of consonant and vowel
+    pairs in the sentence. A letter pair
+    is two consecutive appearances of the
+    same consonant or vowel e.g. jj or oo
+
+    :param line: the line
+    :return: Range of letter pairs
+    """
     vowels = {"a", "e", "i", "o", "u"}
     v_count = c_count = i = 0
 
@@ -90,6 +138,13 @@ def vow_con_pairs(line):
 
 
 def pair_range(pair_count):
+    """
+    Finds the range which a pair_count
+    falls into.
+
+    :param pair_count: a count of pairs
+    :return: the appropriate range
+    """
     range1 = 0, 3
     range2 = 4, 7
     range3 = 8, 10
@@ -106,12 +161,16 @@ def pair_range(pair_count):
 
 
 def avg_word_len(line):
+    """
+    :param line: the line
+    :return: range of average length of words in the line
+    """
     total = 0
     range1 = 0, 4
     range2 = 5, 8
     range3 = 8, None
 
-    for ch in line:
+    for _ in line:
         total += 1
 
     avg = total//len(line.split())
@@ -126,6 +185,10 @@ def avg_word_len(line):
 
 
 def vow_con_ratio(line):
+    """
+    :param line: the line
+    :return: the ratio of consonants to vowels.
+    """
     vowels = {"a", "e", "i", "o", "u"}
     v_count = c_count = 0
     range1 = 0, 0.5

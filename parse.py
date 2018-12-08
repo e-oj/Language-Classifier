@@ -2,6 +2,12 @@ from instance import Instance
 
 
 def parse(files):
+    """
+    Parses instances from a file
+
+    :param files: a collection of files
+    :return: a collection of instances
+    """
     lines = [[] for _ in files]
 
     for i in range(len(files)):

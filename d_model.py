@@ -5,8 +5,20 @@ from d_tree import d_tree
 
 
 class DecisionModel:
+    """
+    This class represents a model based on
+    decision trees.
+    """
+
     def __init__(self, train_file="./in/train.dat", test_file="./in/test.dat",
                  out_file="./out/tree.dt"):
+        """
+        Initialize the model
+
+        :param train_file: training data
+        :param test_file: test data
+        :param out_file: output data
+        """
         files = (train_file, test_file)
         lines = parse(files)
 
@@ -15,6 +27,10 @@ class DecisionModel:
         self.tree = None
 
     def train(self):
+        """
+        Learns a decision tree and saves
+        the model to a file.
+        """
         examples = self.data["train"]
         features = set(examples[0].features.keys())
 
@@ -24,11 +40,16 @@ class DecisionModel:
         pickle.dump(self, f)
         f.close()
 
-    def test(self, h_file=None):
+    def test(self, test_file=None):
+        """
+        Tests the model.
+
+        :param test_file: test data
+        """
         if not self.tree:
             self.train()
 
-        examples = parse([h_file])[0] if h_file else self.data["test"]
+        examples = parse([test_file])[0] if test_file else self.data["test"]
         result = []
 
         for ex in examples:
@@ -39,12 +60,18 @@ class DecisionModel:
         evaluate(result, examples)
 
 
-def evaluate(result, examples):
+def evaluate(results, examples):
+    """
+    Evaluates results from a model.
+
+    :param results: list of results
+    :param examples: test data
+    """
     correct = 0
 
     print()
 
-    for res in result:
+    for res in results:
         if res["result"] == res["goal"]:
             correct += 1
         else:
@@ -57,6 +84,9 @@ def evaluate(result, examples):
 
 
 def main():
+    """
+    Main function. (Test)
+    """
     model = DecisionModel()
     model.train()
     model.test()
