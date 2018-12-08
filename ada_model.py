@@ -8,7 +8,7 @@ from weighted_sample import WeightedSample
 
 class AdaModel:
     def __init__(self, train_file="./in/train.dat", test_file="./in/test.dat",
-                 out_file="./out/ensemble.dt"):
+                 out_file="./out/ensemble.ab"):
 
         files = (train_file, test_file)
         lines = parse(files)
