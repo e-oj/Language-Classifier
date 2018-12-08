@@ -5,7 +5,8 @@ from d_tree import d_tree
 
 
 class DecisionModel:
-    def __init__(self, train_file, test_file, out_file):
+    def __init__(self, train_file="./in/train.dat", test_file="./in/test.dat",
+                 out_file="./out/tree.dt"):
         files = (train_file, test_file)
         lines = parse(files)
 
@@ -20,14 +21,14 @@ class DecisionModel:
         self.tree = d_tree(examples, features, [], 6)
 
         f = open(self.out_file, "wb")
-        pickle.dump(self.tree, f)
+        pickle.dump(self, f)
         f.close()
 
-    def test(self):
+    def test(self, h_file=None):
         if not self.tree:
             self.train()
 
-        examples = self.data["test"]
+        examples = parse([h_file])[0] if h_file else self.data["test"]
         result = []
 
         for ex in examples:
@@ -56,7 +57,7 @@ def evaluate(result, examples):
 
 
 def main():
-    model = DecisionModel("./in/train.dat", "./in/train.dat", "./out/tree.dt")
+    model = DecisionModel()
     model.train()
     model.test()
 

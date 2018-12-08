@@ -7,7 +7,9 @@ from weighted_sample import WeightedSample
 
 
 class AdaModel:
-    def __init__(self, train_file, test_file, out_file):
+    def __init__(self, train_file="./in/train.dat", test_file="./in/test.dat",
+                 out_file="./out/ensemble.dt"):
+
         files = (train_file, test_file)
         lines = parse(files)
 
@@ -25,8 +27,6 @@ class AdaModel:
         for i in range(ensemble_size):
             stump = d_tree(examples, features, [], 1)
             error = 0
-
-            stump.print()
 
             for ex in examples:
                 decision = stump.decide(ex)
@@ -47,14 +47,14 @@ class AdaModel:
             self.ensemble.append(stump)
 
         f = open(self.out_file, "wb")
-        pickle.dump(self.ensemble, f)
+        pickle.dump(self, f)
         f.close()
 
-    def test(self):
+    def test(self, h_file=None):
         if not self.ensemble:
             self.train()
 
-        examples = self.data["test"]
+        examples = parse([h_file])[0] if h_file else self.data["test"]
         result = []
 
         for ex in examples:
@@ -102,8 +102,8 @@ def evaluate(result, examples):
 
 
 def main():
-    model = AdaModel("./in/train.dat", "./in/test.dat", "./out/ensemble.dt")
-    model.train()
+    model = AdaModel()
+    model.train(5)
     model.test()
 
 

@@ -11,10 +11,6 @@ def parse(files):
             if not len(line.strip()) > 3:
                 continue
 
-            line = Instance(line)
-
-            print(line.goal, ":", line.features, ":", line.value)
-
-            lines[i].append(line)
+            lines[i].append(Instance(line))
 
     return lines

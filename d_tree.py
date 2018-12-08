@@ -25,7 +25,6 @@ def d_tree(examples, features, parent_examples, depth=20):
             subtree = d_tree(exs, features.difference({feature}), examples, depth - 1)
             root.add(value, subtree)
 
-    print("depth: ", depth)
     return root
 
 
