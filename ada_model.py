@@ -12,7 +12,7 @@ class AdaModel:
     adaboost.
     """
     def __init__(self, train_file="./in/train.dat", test_file="./in/test.dat",
-                 out_file="./out/ensemble.ab"):
+                 out_file="./out/ensemble.oj"):
         """
         Initialize the model.
 

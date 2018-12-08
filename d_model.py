@@ -11,7 +11,7 @@ class DecisionModel:
     """
 
     def __init__(self, train_file="./in/train.dat", test_file="./in/test.dat",
-                 out_file="./out/tree.dt"):
+                 out_file="./out/tree.oj"):
         """
         Initialize the model
 
