@@ -3,15 +3,17 @@
 
 This classifier distinguishes between two or more languages. It's currently set up to differentiaite English from 
 Dutch but you can classify other languages by modifying the training data. You can also edit the language features to get 
-stronger results for new languages. For extra details, checkout this [writeup](https://docs.google.com/document/d/1TWwhFmji458pAycIzHSXn9rB8dsC8AZpyY7Qghsrwew/edit?usp=sharing)
+stronger results for new languages. For extra details, checkout this [writeup](https://docs.google.com/document/d/1TWwhFmji458pAycIzHSXn9rB8dsC8AZpyY7Qghsrwew/edit?usp=sharing). <b>This program has no dependencies. Every algorithm used was implemented from scratch.</b>
 
-**This program has no dependencies. Every algorithm used was implemented from scratch.**
+<br>
 
 ### Algorithms
 Two classification methods are used by this program.
 
 #### Decision Tree:
 A decision tree is built from the training data. Entropy is used as a measure of impurity in a given set, and the Information gain algorithm is used to split the data by features. The decision can be assigned a maximum depth to restrict its growth.
+
+<br>
 
 ### Usage
 #### The program has two entry points in the root directory, accessible via the following commands:
