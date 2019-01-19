@@ -11,7 +11,7 @@ stronger results for new languages. For extra details, checkout this [writeup](h
 Two classification methods are used by this program.
 
 #### Decision Tree:
-A decision tree is built from the training data. Entropy is used as a measure of impurity in a test set, and the Information gain algorithm is used to split the data by features. The decision can be assigned a maximum depth to restrict its growth.
+A decision tree is built from the training data. Entropy is used as a measure of impurity in a given set, and the Information gain algorithm is used to split the data by features. The decision can be assigned a maximum depth to restrict its growth.
 
 ### Usage
 #### The program has two entry points in the root directory, accessible via the following commands:
