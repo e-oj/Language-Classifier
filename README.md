@@ -11,10 +11,10 @@ stronger results for new languages. For extra details, checkout this [writeup](h
 Two classification methods are used by this program.
 
 #### Decision Tree:
-A decision tree is built using the training data. Entropy is used as a measure of impurity in a given set, and the Information gain algorithm is used to split the data by features. The decision tree can be assigned a maximum depth to restrict its growth.
+A decision tree is built using the training data. Entropy is used as a measure of impurity in a given set, and the Information gain algorithm is used to split the data by features. The decision tree can be assigned a maximum depth to restrict its growth. [More on decision trees](https://www.geeksforgeeks.org/decision-tree/)
 
 #### AdaBoost:
-A boosted ensemble of decicion stumps (decision trees with a depth of 1) is built using the training data. Every instance of data is assigned a weight (forming a distribution) and the AdaBoost algorithm is used to adjust the weight of each instance before the next stump in the ensemble is created. Check out [this article](https://towardsdatascience.com/boosting-algorithm-adaboost-b6737a9ee60c) for more on AdaBoost.
+A boosted ensemble of decicion stumps (decision trees with a depth of 1) is built using the training data. Every instance of data is assigned a weight (forming a distribution) and the AdaBoost algorithm is used to adjust the weight of each instance before the next stump in the ensemble is created. [More on AdaBoost](https://towardsdatascience.com/boosting-algorithm-adaboost-b6737a9ee60c).
 
 <br>
 
