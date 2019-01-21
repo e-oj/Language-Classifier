@@ -1,24 +1,24 @@
-import string
-
-
 class Instance:
     """
     This class represents a single instance of
     input data.
     """
 
-    def __init__(self, line):
+    def __init__(self, line, preserve=False):
         """
         Initializes an instance with a line of
         text. Features are extracted from the line
         and added to the instance.
 
         :param line: The input line
+        :param preserve: strip a line or not?
         """
-        puncs = string.punctuation
-        line = "".join([ch for ch in line if ch not in puncs])
-        self.goal = line[:2]
-        self.value = line[2:]
+        if preserve:
+            self.goal = None
+            self.value = line
+        else:
+            self.goal = line[:2]
+            self.value = line[2:]
         self.features = get_features(line)
         self.weight = None
 
