@@ -1,6 +1,7 @@
 import pickle
 import math
 
+from instance import Instance
 from parse import parse
 from d_tree import d_tree
 from weighted_sample import WeightedSample
@@ -84,6 +85,21 @@ class AdaModel:
 
         evaluate(result, examples)
 
+    def predict(self, line):
+        """
+        Predicts a single line
+
+        :param line: line to test
+        :return: prediction (en or nl)
+        """
+        if not self.ensemble:
+            self.train()
+
+        ex = Instance(line, preserve=True)
+        d = self.vote(ex)
+        print("| value:", ex.value, "| result:", d)
+        return d
+
     def vote(self, instance):
         """
         Classifies an instance by collecting
@@ -140,6 +156,9 @@ def main():
     """
     model = AdaModel()
     model.train(5)
+    # model.predict("en|as another store room. The ramp has been discreetly slipped into the screened area at")
+    # model.predict("en|means that each team will try to get their first four (at least) riders across")
+    # model.predict("nl|Zijn eerste boek The Peasants Revolt verscheen in 2009. Zijn tweede boek over het Huis")
     model.test()
 
 

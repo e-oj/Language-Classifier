@@ -1,5 +1,6 @@
 import pickle
 
+from instance import Instance
 from parse import parse
 from d_tree import d_tree
 
@@ -59,6 +60,20 @@ class DecisionModel:
 
         evaluate(result, examples)
 
+    def predict(self, line):
+        """
+        Predicts a single line
+
+        :param line: line to test
+        :return: prediction (en or nl)
+        """
+        if not self.tree:
+            self.train()
+
+        ex = Instance(line, preserve=True)
+        d = self.tree.decide(ex)
+        print("| value:", ex.value, "| result:", d)
+        return d
 
 def evaluate(results, examples):
     """
@@ -89,6 +104,8 @@ def main():
     """
     model = DecisionModel()
     model.train()
+    # model.predict("as another store room. The ramp has been discreetly slipped into the screened area at")
+    # model.predict("stelde zich ten doel om zoveel mogelijk van het verleden van Arundel te redden en")
     model.test()
 
 

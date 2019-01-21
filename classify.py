@@ -1,5 +1,6 @@
 import sys
 import pickle
+import os
 
 from d_model import DecisionModel
 from ada_model import AdaModel
@@ -49,6 +50,43 @@ def usage(train_msg=True, predict_msg=True):
 
     exit(1)
 
+def cmd():
+    """
+    Runs interactive terminal
+    """
+    modelFound = False
+    modelDir = "out"
+
+    for file in os.listdir("out"):
+        try:
+            h_file = open(modelDir + "/" + file, "rb")
+            model = pickle.load(h_file)
+            h_file.close()
+            modelFound = True
+            break
+        except IOError as e:
+            continue
+
+    if (modelFound == False):
+        model = AdaModel()
+        model.train(5)
+
+    correct = 0
+    total = 0
+
+    while True:
+        line = input("Enter line to predict or \"Quit\": ")
+        if line == "Quit":
+            break
+        else:
+            model.predict(line)
+            res = input("Did I get it \"Y/N\": ")
+            if res == "Y":
+                correct += 1
+            total += 1
+
+    print("| correct: ", correct, "| total: ", total, "| accuracy:", str((correct / total) * 100) + "%")
+
 
 def main():
     """
@@ -82,4 +120,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    #main()
+    cmd()
