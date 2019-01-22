@@ -67,6 +67,6 @@ Any of these files can be used to run the classification job.
 
 ### Language Features
 The strength of a model is heavily dependent on the strength of the features used in training. While some were generic, 
-a vast majority of the features used were geared towards English and Dutch. You can modify these features in the 
+a vast majority of the features used were geared towards English and Dutch. These features can be modified in the 
 ```get_features``` function of ```instance.py```. A more detailed explanation of the features can be found 
 [in the writeup](https://docs.google.com/document/d/1TWwhFmji458pAycIzHSXn9rB8dsC8AZpyY7Qghsrwew/edit?usp=sharing)
