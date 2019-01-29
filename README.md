@@ -28,7 +28,7 @@ A boosted ensemble of decicion stumps (decision trees with a depth of 1) is buil
 
 
 <b>python3 classify.py predict</b> `<hypothesis>` `<file>`
- - `<hypothesis>` is a pre-trained model created by your train program
+ - `<hypothesis>` is a pre-trained model created by the train program
  - `<file>` is a file containing test data.
 
 <br>
