@@ -1,7 +1,7 @@
 # Language Classifier
 ## Language classification using decision trees and adaboost.
 
-This classifier distinguishes between two or more languages. It's currently set up to differentiaite English from 
+This classifier distinguishes between two or more languages. It's currently set up to differentiate English from 
 Dutch but you can classify other languages by modifying the training data. You can also edit the language features to get 
 stronger results for new languages. For extra details, checkout this [writeup](https://docs.google.com/document/d/1TWwhFmji458pAycIzHSXn9rB8dsC8AZpyY7Qghsrwew/edit?usp=sharing). <b>This program has no dependencies. Every algorithm used was implemented from scratch.</b>
 
