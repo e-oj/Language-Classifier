@@ -1,4 +1,4 @@
-## Language Classifier
+# Language Classifier
 ### Language classification using decision trees and adaboost.
 
 This classifier distinguishes between two or more languages. It's currently set up to differentiate English from 
